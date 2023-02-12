@@ -5,25 +5,91 @@ set(PROJECT_NAME Pacman)
 ################################################################################
 
 set(Source_Files
+    "Blinky.cpp"
+    "Candy.cpp"
+    "Game.cpp"
+    "Inky.cpp"
+    "Button.cpp"
+    "Cell.cpp"
+    "Character.cpp"
+    "Clyde.cpp"
+    "excerptScreen.cpp"
+    "Fruit.cpp"
+    "GameLevelScreen.cpp"
+    "GameObject.cpp"
+    "FoodItem.cpp"
+    "gameOverScreen.cpp"
+    "gameScreen.cpp"
+    "Ghost.cpp"
+    "Level.cpp"
+    "Lollipop.cpp"
+    "LTexture.cpp"
+    "menuScreen.cpp"
+    "pauseScreen.cpp"
+    "Pinky.cpp"
+    "quitScreen.cpp"
+    "word.cpp"
+    "Screen.cpp"
+    "splashScreen.cpp"
+    "Pacman.cpp"
     "Main.cpp"
 )
 
 source_group("Source Files" FILES ${Source_Files})
 
+set(Header_Files
+    "FoodItem.h"
+    "GlobalFunctions.h"
+    "word.h"
+    "Blinky.h"
+    "Button.h"
+    "Candy.h"
+    "Cell.h"
+    "Character.h"
+    "Clyde.h"
+    "excerptScreen.h"
+    "Fruit.h"
+    "GameLevelScreen.h"
+    "GameObject.h"
+    "Game.h"
+    "gameOverScreen.h"
+    "gameScreen.h"
+    "Ghost.h"
+    "Inky.h"
+    "Level.h"
+    "Lollipop.h"
+    "LTexture.h"
+    "menuScreen.h"
+    "pauseScreen.h"
+    "Pinky.h"
+    "quitScreen.h"
+    "Pacman.h"
+    "Point.h"
+    "Screen.h"
+    "splashScreen.h"
+)
+
+source_group("Header Files" FILES ${Header_Files})
+
 set(ALL_FILES
     ${Source_Files}
+    ${Header_Files}
 )
 
 if(WIN32) 
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../SDL2") 
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../Middleware/SDL2") 
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../Middleware/SDL2_Image") 
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../Middleware/SDL2_Mixer") 
+
 endif() 
 
 #Import the SDL2 library 
 find_package(SDL2 REQUIRED)
-
+find_package(SDL2_image REQUIRED)
+find_package(SDL2_mixer REQUIRED)
 
 include_directories(".")
-include_directories(${SDL2_INCLUDE_DIRS})
+include_directories(${SDL2_INCLUDE_DIRS} ${SDL2_IMAGE_INCLUDE_DIRS} ${SDL2_MIXER_INCLUDE_DIRS})
 
 
 ################################################################################
@@ -102,5 +168,5 @@ if(MSVC)
 endif()
 
 #target_link_libraries(${PROJECT_NAME} PUBLIC SDL2::SDL2 SDL2::SDL2main)
-target_link_libraries(${PROJECT_NAME} PUBLIC ${SDL2_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
 
